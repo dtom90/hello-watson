@@ -18,15 +18,17 @@
 process.env.SUPPRESS_NO_CONFIG_WARNING = true;
 
 // library requires
-const express = require('express'),
-  config = require('config'),
-  compression = require('compression'),
-  bodyParser = require('body-parser'),  // parser for post requests
-  watson = require('watson-developer-cloud');
+import express from 'express';
+import { config } from 'dotenv';
+import assistant from './pipeline/assistant.js';
+  // config = require('config'),
+  // compression = require('compression'),
+  // bodyParser = require('body-parser'),  // parser for post requests
+  // watson = require('watson-developer-cloud');
 
-require('dotenv').config({silent: true}); // load environment variables from .env file
+config({silent: true}); // load environment variables from .env file
 
-require('./pipeline/database.js');
+// require('./pipeline/database.js');
 
 let app = express();
 
@@ -34,19 +36,19 @@ let app = express();
 if(process.env.VCAP_APP_PORT)
   app.use(requireHTTPS);
 
-app.use(compression());
-app.use(bodyParser.json());
+// app.use(compression());
+// app.use(bodyParser.json());
 
 //static folder containing UI
-app.use(express.static(__dirname + "/dist"));
+// app.use(express.static(__dirname + "/public"));
 
 // Endpoint to be called from the client side
-app.use('/api/message', require('./pipeline/conversation.js'));
+app.use('/api/message', assistant);
 
-app.use('/chats', require('./pipeline/database.js').router);
-
-app.use('/api/speech-to-text/', require('./speech/stt-token.js'));
-app.use('/api/text-to-speech/', require('./speech/tts-token.js'));
+// app.use('/chats', require('./pipeline/database.js').router);
+//
+// app.use('/api/speech-to-text/', require('./speech/stt-token.js'));
+// app.use('/api/text-to-speech/', require('./speech/tts-token.js'));
 
 function requireHTTPS(req, res, next) {
   if (req.headers && req.headers.$wssp === "80") {
@@ -55,4 +57,4 @@ function requireHTTPS(req, res, next) {
   next();
 }
 
-module.exports = app;
+export default app;

@@ -5,5 +5,7 @@ dist/
 temp/
 npm-debug.log
 .env
+ibm-credentials.env
 config/default.json
 manifest.yml
+yarn-error.log
