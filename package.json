@@ -13,19 +13,22 @@
     "autofix": "eslint --fix .",
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public",
-    "server": "node server.js"
+    "start": "node server.js"
   },
   "author": "IBM Corp.",
   "dependencies": {
+    "@polka/send-type": "^0.5.2",
+    "compression": "^1.7.4",
     "express": "^4.17.1",
     "ibm-watson": "^5.7.1",
+    "polka": "^0.5.2",
+    "sirv": "^1.0.6",
     "sirv-cli": "^1.0.0"
   },
   "devDependencies": {
-    "eslint": "^4.19.1",
     "@rollup/plugin-commonjs": "^14.0.0",
     "@rollup/plugin-node-resolve": "^8.0.0",
+    "eslint": "^4.19.1",
     "rollup": "^2.3.4",
     "rollup-plugin-livereload": "^2.0.0",
     "rollup-plugin-svelte": "^6.0.0",

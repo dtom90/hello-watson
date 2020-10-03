@@ -1,10 +1,19 @@
-#!/usr/bin/env node
+import sirv from 'sirv';
+import compression from 'compression';
+import polka from 'polka';
 
-'use strict';
+import api from './api/index.js';
 
-import app from './app.js';
-let port = process.env.PORT || process.env.VCAP_APP_PORT || 3000;
-
-app.listen(port, function() {
-  console.log('Server running on port: %d', port);
+// Init `sirv` handler
+const assets = sirv('public', {
+  maxAge: 31536000, // 1Y
+  immutable: true
 });
+
+polka()
+  .use(compression(), assets)
+  .use('/api', api)
+  .listen(3000, err => {
+    if (err) throw err;
+    console.log('> Ready on localhost:3000~!');
+  });
