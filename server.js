@@ -1,6 +1,6 @@
+import polka from 'polka';
 import sirv from 'sirv';
 import compression from 'compression';
-import polka from 'polka';
 
 import api from './api/index.js';
 

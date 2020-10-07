@@ -1,15 +1,17 @@
 import polka from 'polka';
+import bodyParser from 'body-parser';
 import send from '@polka/send-type';
 
-const api = polka();
+const api = polka()
+  .use(bodyParser.json());
 
-const messages = [
-  'Hello, my name is Watson. What can I do for you today?',
-  'I am doing well, thank you for asking!'
-]
-
-api.get('/message', (req, res) => {
-  send(res, 200, {name: 'john'});
+api.post('/message', (req, res) => {
+  const userMessage = req.body.message;
+  if (Math.random() > 0.5) {
+    send(res, 200, {message: `I see that you just said "${userMessage}". What a great thing to hear!`});
+  } else {
+    send(res, 502, {error: 'Could not communicate with Watson'});
+  }
 });
 
 export default api;

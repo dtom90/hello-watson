@@ -1,10 +1,23 @@
 <script>
+  import request from 'superagent';
+
   let messages = [];
 
-  function sendMessage(event) {
+  async function sendMessage(event) {
     const message = event.target.messageInput.value;
     messages = [...messages, {isBot: false, message}];
     event.target.messageInput.value = '';
+
+    try {
+      const response = await request.post('/api/message').send({message});
+      messages = [...messages, {isBot: true, ...response.body}];
+    } catch (error) {
+      console.error(error.response);
+      messages = [...messages,
+        {isBot: true, message: 'Oops, looks like I had trouble processing that message...'},
+        {isBot: true, message: `I got the error "${error.response.body.error}"`}
+      ];
+    }
   }
 </script>
 
