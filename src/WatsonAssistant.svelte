@@ -1,15 +1,20 @@
 <script>
-  let messages = [
-    {bot: true, message: 'Hello, my name is Watson!'},
-    {bot: true, message: 'I can answer simple questions'},
-    {user: true, message: 'How are you today?'},
-    {bot: true, message: 'I am doing well, thank you for asking!'}
-  ];
+  let messages = [];
+
+  function sendMessage(event) {
+    const message = event.target.messageInput.value;
+    messages = [...messages, {isBot: false, message}];
+    event.target.messageInput.value = '';
+  }
 </script>
 
 <div class="chat-container">
-    {#each messages as {bot, message}}
-        <div class="message-container {bot ? 'bot' : 'user'}-message">
+    <form on:submit|preventDefault={sendMessage}>
+        <label for="messageInput">Message:</label>
+        <input id="messageInput" type="text">
+    </form>
+    {#each messages as {isBot, message}, i}
+        <div class="message-container {isBot ? 'bot' : 'user'}-message">
             <span class="message">{message}</span>
         </div>
     {/each}
