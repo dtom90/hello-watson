@@ -1,16 +1,18 @@
 import polka from 'polka';
 import bodyParser from 'body-parser';
 import send from '@polka/send-type';
+import {sendMessage} from './assistant.js';
 
 const api = polka()
   .use(bodyParser.json());
 
-api.post('/message', (req, res) => {
-  const userMessage = req.body.message;
-  if (Math.random() > 0.5) {
-    send(res, 200, {message: `I see that you just said "${userMessage}". What a great thing to hear!`});
-  } else {
-    send(res, 502, {error: 'Could not communicate with Watson'});
+api.post('/message', async (req, res) => {
+  const {sessionId, text} = req.body;
+  try {
+    const {result} = await sendMessage(sessionId, {text});
+    send(res, 200, {sessionId, ...result});
+  } catch (error) {
+    send(res, 502, {error: error.message});
   }
 });
 

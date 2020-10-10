@@ -1,34 +1,41 @@
 <script>
   import request from 'superagent';
 
+  let sessionId = '';
   let messages = [];
 
-  async function sendMessage(event) {
-    const message = event.target.messageInput.value;
-    messages = [...messages, {isBot: false, message}];
-    event.target.messageInput.value = '';
-
+  async function sendMessage(text) {
     try {
-      const response = await request.post('/api/message').send({message});
-      messages = [...messages, {isBot: true, ...response.body}];
+      const {body} = await request.post('/api/message').send({sessionId, text});
+      sessionId = body.sessionId;
+      messages = [...messages, ...body.output.generic];
     } catch (error) {
       console.error(error.response);
       messages = [...messages,
-        {isBot: true, message: 'Oops, looks like I had trouble processing that message...'},
-        {isBot: true, message: `I got the error "${error.response.body.error}"`}
+        {isUser: false, text: 'Oops, looks like I had trouble processing that message...'},
+        {isUser: false, text: `I got the error "${error.response.body.error}"`}
       ];
     }
   }
+
+  async function submitMessageInput(event) {
+    const text = event.target.messageInput.value;
+    messages = [...messages, {isUser: true, text}];
+    event.target.messageInput.value = '';
+    await sendMessage(text);
+  }
+
+  sendMessage('');
 </script>
 
 <div class="chat-container">
-    <form on:submit|preventDefault={sendMessage}>
+    <form on:submit|preventDefault={submitMessageInput}>
         <label for="messageInput">Message:</label>
         <input id="messageInput" type="text">
     </form>
-    {#each messages as {isBot, message}, i}
-        <div class="message-container {isBot ? 'bot' : 'user'}-message">
-            <span class="message">{message}</span>
+    {#each messages as {isUser, text}, i}
+        <div class="message-container {isUser ? 'user' : 'bot'}-message">
+            <span class="message">{text}</span>
         </div>
     {/each}
 </div>
