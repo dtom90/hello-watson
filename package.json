@@ -1,6 +1,6 @@
 {
   "name": "hello-watson",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "private": true,
   "engines": {
     "node": "14.13.0",
@@ -11,6 +11,7 @@
   "scripts": {
     "lint": "eslint .",
     "autofix": "eslint --fix .",
+    "test": "npm run lint",
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "node server.js"
