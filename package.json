@@ -1,12 +1,12 @@
 {
   "name": "hello-watson",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "engines": {
     "node": "14.13.0",
     "npm": "6.14.8"
   },
   "type": "module",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "lint": "eslint .",
     "autofix": "eslint --fix .",
