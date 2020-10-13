@@ -1,5 +1,5 @@
 <script>
-  import WatsonAssistant from './WatsonAssistant.svelte';
+  import ChatArea from './ChatArea.svelte';
 
   export let title = 'Hello Watson!';
   export let noTitle = false;
@@ -10,7 +10,7 @@
         <h1>{title}</h1>
     {/if}
     <div class="chat-area">
-        <WatsonAssistant/>
+        <ChatArea/>
     </div>
 </main>
 

@@ -1,4 +1,4 @@
-import AssistantV2 from 'ibm-watson/assistant/v2.js';
+const AssistantV2 = require('ibm-watson/assistant/v2');
 
 const assistant = new AssistantV2({
   serviceName: 'assistant',
@@ -24,6 +24,6 @@ const sendMessage = async (sessionId, input) => {
   });
 };
 
-export {
+module.exports = {
   sendMessage
 };

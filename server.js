@@ -1,8 +1,8 @@
-import polka from 'polka';
-import sirv from 'sirv';
-import compression from 'compression';
+const polka = require('polka');
+const sirv = require('sirv');
+const compression = require('compression');
 
-import api from './api/index.js';
+const api = require('./api');
 
 // Init `sirv` handler
 const assets = sirv('public', {
@@ -10,10 +10,12 @@ const assets = sirv('public', {
   immutable: true
 });
 
-polka()
+const assistantServer = polka()
   .use(compression(), assets)
   .use('/api', api)
   .listen(3000, err => {
     if (err) throw err;
     console.log('> Ready at http://localhost:3000'); // eslint-disable-line no-console
   });
+
+module.exports = assistantServer;

@@ -1,7 +1,7 @@
-import polka from 'polka';
-import bodyParser from 'body-parser';
-import send from '@polka/send-type';
-import {sendMessage} from './assistant.js';
+const polka = require('polka');
+const bodyParser = require('body-parser');
+const send = require('@polka/send-type');
+const {sendMessage} = require('./assistant.js');
 
 const api = polka()
   .use(bodyParser.json());
@@ -16,4 +16,4 @@ api.post('/message', async (req, res) => {
   }
 });
 
-export default api;
+module.exports = api;
