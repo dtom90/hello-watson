@@ -1,14 +1,20 @@
 const AssistantV2 = require('ibm-watson/assistant/v2');
+require('dotenv').config();
 
 const assistant = new AssistantV2({
   serviceName: 'assistant',
   version: '2020-04-01'
 });
 
+if (!process.env.ASSISTANT_ID) {
+  throw Error('Missing ASSISTANT_ID env var');
+}
+
+const assistantId = process.env.ASSISTANT_ID;
 
 const initConversation = async () =>
   assistant.createSession({
-    assistantId: 'fa9acfa6-1ee7-453c-a753-03700de3e3b0'
+    assistantId
   });
 
 
@@ -18,7 +24,7 @@ const sendMessage = async (sessionId, input) => {
     sessionId = result.session_id;
   }
   return assistant.message({
-    assistantId: 'fa9acfa6-1ee7-453c-a753-03700de3e3b0',
+    assistantId,
     sessionId,
     input
   });
