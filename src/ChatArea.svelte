@@ -1,12 +1,17 @@
 <script>
   import request from 'superagent';
 
+  export let debug = false;
+
   let sessionId = '';
   let messages = [];
 
   async function sendMessage(text) {
     try {
       const {body} = await request.post('/api/message').send({sessionId, text});
+      if (debug) {
+        console.log(body);
+      }
       sessionId = body.sessionId;
       messages = [...messages, ...body.output.generic];
     } catch (error) {
