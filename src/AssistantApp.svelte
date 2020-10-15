@@ -1,6 +1,8 @@
 <script>
   import ChatArea from './ChatArea.svelte';
 
+  let debug = false;
+
   export let title = 'Hello Watson!';
   export let noTitle = false;
 </script>
@@ -9,8 +11,13 @@
     {#if !noTitle}
         <h1>{title}</h1>
     {/if}
+
+    <label>
+        <input type="checkbox" bind:checked={debug}>
+        Debug
+    </label>
     <div class="chat-area">
-        <ChatArea/>
+        <ChatArea debug={debug}/>
     </div>
 </main>
 
