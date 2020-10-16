@@ -35,8 +35,10 @@
 
 <div class="chat-container">
     <form on:submit|preventDefault={submitMessageInput}>
-        <label for="messageInput">Message:</label>
-        <input id="messageInput" type="text">
+        <label>
+            Message:
+            <input id="messageInput" type="text" size="50">
+        </label>
     </form>
     {#each messages as {isUser, text}, i}
         <div class="message-container {isUser ? 'user' : 'bot'}-message">
@@ -47,7 +49,7 @@
 
 <style>
     .chat-container {
-        background-color: lightgray;
+        background-color: rgba(0, 0, 0, 0.1);
         width: 100%;
         height: 100%;
     }
@@ -58,12 +60,14 @@
     }
 
     .message {
-        padding: 10px;
-        border-radius: 10px;
+        padding: 12.5px 18.75px;
+        margin: 0.3125rem 0;
+        border-radius: 20px;
+        color: white;
     }
 
     .bot-message > .message {
-        background-color: lightgreen;
+        background-color: rgb(0, 133, 113);
     }
 
     .user-message {
@@ -71,6 +75,6 @@
     }
 
     .user-message > .message {
-        background-color: #00B4A0;
+        background-color: #007fff;
     }
 </style>

@@ -12,10 +12,12 @@
         <h1>{title}</h1>
     {/if}
 
-    <label>
-        <input type="checkbox" bind:checked={debug}>
-        Debug
-    </label>
+    <div id="debug-wrapper">
+        <label>
+            <input type="checkbox" bind:checked={debug}>
+            Debug
+        </label>
+    </div>
     <div class="chat-area">
         <ChatArea debug={debug}/>
     </div>
@@ -33,9 +35,13 @@
 
     h1 {
         color: blue;
-        text-transform: uppercase;
         font-size: 4em;
-        font-weight: 100;
+    }
+    
+    #debug-wrapper {
+        display: flex;
+        justify-content: right;
+        padding: 0 10px;
     }
 
     .chat-area {

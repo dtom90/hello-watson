@@ -6,6 +6,7 @@ const api = require('./api');
 
 // Init `sirv` handler
 const assets = sirv('public', {
+  dev: process.argv[2] === '--dev',
   maxAge: 31536000, // 1Y
   immutable: true
 });
