@@ -3,22 +3,25 @@
 
   let debug = false;
 
-  export let title = 'Hello Watson!';
-  export let noTitle = false;
+  export let title = null;
+  export let titleColor = 'black';
+  export let debugCheckbox = false;
 </script>
 
 <main>
-    {#if !noTitle}
-        <h1 id="app-title">{title}</h1>
+    {#if title}
+        <h1 id="app-title" style="color: {titleColor}">{title}</h1>
     {/if}
 
-    <div id="debug-wrapper" class="form-group">
-        <label>
-            <input type="checkbox" bind:checked={debug}>
-            Debug
-        </label>
-    </div>
-    <div class="chat-area">
+    {#if debugCheckbox}
+        <div id="debug-wrapper">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="debugCheckbox" bind:checked={debug}>
+                <label class="form-check-label" for="debugCheckbox">Debug</label>
+            </div>
+        </div>
+    {/if}
+    <div id="chat-container">
         <ChatArea debug={debug}/>
     </div>
 </main>
@@ -27,26 +30,26 @@
   @import "./bootstrap";
 
   main {
-    text-align: center;
     margin: 0 auto;
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     display: flex;
     flex-direction: column;
   }
 
   #app-title {
-    color: blue;
+    text-align: center;
     font-size: 4em;
   }
 
   #debug-wrapper {
     display: flex;
     justify-content: right;
-    padding: 0 10px;
+    padding: 10px;
   }
 
-  .chat-area {
+  #chat-container {
     flex: 1;
+    overflow: hidden;
   }
 </style>

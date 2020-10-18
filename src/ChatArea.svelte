@@ -33,28 +33,41 @@
   sendMessage('');
 </script>
 
-<div class="chat-container">
-    <form class="form-inline" on:submit|preventDefault={submitMessageInput}>
-        <label>
-            Message:
-            <input id="messageInput" class="form-control" type="text" size="50">
-        </label>
+<div id="chat-area">
+    <form on:submit|preventDefault={submitMessageInput}>
+        <input id="messageInput" class="form-control" type="text" placeholder="enter a message...">
     </form>
-    {#each messages as {isUser, text}, i}
-        <div class="message-container {isUser ? 'user' : 'bot'}-message">
-            <span class="message">{text}</span>
+    <div id="messages-area">
+        <div id="messages-view">
+            {#each messages as {isUser, text}, i}
+                <div class="message-row {isUser ? 'user' : 'bot'}-message">
+                    <span class="message">{text}</span>
+                </div>
+            {/each}
         </div>
-    {/each}
+    </div>
 </div>
 
 <style>
-    .chat-container {
+    #chat-area {
         background-color: rgba(0, 0, 0, 0.1);
         width: 100%;
         height: 100%;
+        display: flex;
+        flex-direction: column;
     }
 
-    .message-container {
+    #messages-area {
+        flex: 1;
+        overflow-y: hidden;
+    }
+
+    #messages-view {
+        height: 100%;
+        overflow-y: scroll;
+    }
+
+    .message-row {
         padding: 10px 10px 0 10px;
         display: flex;
     }
@@ -70,7 +83,7 @@
         background-color: rgb(0, 133, 113);
     }
 
-    .user-message {
+    .bot-message {
         justify-content: right;
     }
 
