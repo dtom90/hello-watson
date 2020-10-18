@@ -4,6 +4,8 @@ import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import {terser} from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
+import postcss from 'rollup-plugin-postcss';
+import childProcess from 'child_process';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -17,7 +19,7 @@ function serve() {
   return {
     writeBundle() {
       if (server) return;
-      server = require('child_process').spawn('npm', ['run', 'start', '--', '--dev'], {
+      server = childProcess.spawn('npm', ['run', 'start', '--', '--dev'], {
         stdio: ['ignore', 'inherit', 'inherit'],
         shell: true
       });
@@ -46,6 +48,11 @@ export default {
         css.write('bundle.css');
       },
       preprocess: sveltePreprocess()
+    }),
+
+    postcss({
+      modules: true,
+      use: ['sass'],
     }),
 
     // If you have external dependencies installed from
