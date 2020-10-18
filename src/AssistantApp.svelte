@@ -1,4 +1,5 @@
 <script>
+  import Bootstrap from './Bootstrap.svelte';
   import ChatArea from './ChatArea.svelte';
 
   let debug = false;
@@ -8,6 +9,7 @@
   export let debugCheckbox = false;
 </script>
 
+<Bootstrap/>
 <main>
     {#if title}
         <h1 id="app-title" style="color: {titleColor}">{title}</h1>
@@ -26,30 +28,28 @@
     </div>
 </main>
 
-<style type="text/scss" global>
-  @import "./bootstrap";
+<style>
+    main {
+        margin: 0 auto;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+    }
 
-  main {
-    margin: 0 auto;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-  }
+    #app-title {
+        text-align: center;
+        font-size: 4em;
+    }
 
-  #app-title {
-    text-align: center;
-    font-size: 4em;
-  }
+    #debug-wrapper {
+        display: flex;
+        justify-content: right;
+        padding: 10px;
+    }
 
-  #debug-wrapper {
-    display: flex;
-    justify-content: right;
-    padding: 10px;
-  }
-
-  #chat-container {
-    flex: 1;
-    overflow: hidden;
-  }
+    #chat-container {
+        flex: 1;
+        overflow: hidden;
+    }
 </style>
