@@ -2,8 +2,8 @@
   "name": "hello-watson",
   "version": "0.10.6",
   "engines": {
-    "node": "14.13.0",
-    "npm": "6.14.8"
+    "node": "^14.13.0",
+    "npm": "^6.14.8"
   },
   "main": "index.js",
   "scripts": {
