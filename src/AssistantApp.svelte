@@ -3,42 +3,53 @@
 
   let debug = false;
 
-  export let title = 'Hello Watson!';
-  export let noTitle = false;
+  export let title = null;
+  export let titleColor = 'black';
+  export let debugCheckbox = false;
 </script>
 
 <main>
-    {#if !noTitle}
-        <h1>{title}</h1>
+    {#if title}
+        <h1 id="app-title" style="color: {titleColor}">{title}</h1>
     {/if}
 
-    <label>
-        <input type="checkbox" bind:checked={debug}>
-        Debug
-    </label>
-    <div class="chat-area">
+    {#if debugCheckbox}
+        <div id="debug-wrapper">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="debugCheckbox" bind:checked={debug}>
+                <label class="form-check-label" for="debugCheckbox">Debug</label>
+            </div>
+        </div>
+    {/if}
+    <div id="chat-container">
         <ChatArea debug={debug}/>
     </div>
 </main>
 
-<style>
-    main {
-        text-align: center;
-        margin: 0 auto;
-        height: 100%;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-    }
+<style type="text/scss" global>
+  @import "./bootstrap";
 
-    h1 {
-        color: blue;
-        text-transform: uppercase;
-        font-size: 4em;
-        font-weight: 100;
-    }
+  main {
+    margin: 0 auto;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+  }
 
-    .chat-area {
-        flex: 1;
-    }
+  #app-title {
+    text-align: center;
+    font-size: 4em;
+  }
+
+  #debug-wrapper {
+    display: flex;
+    justify-content: right;
+    padding: 10px;
+  }
+
+  #chat-container {
+    flex: 1;
+    overflow: hidden;
+  }
 </style>
