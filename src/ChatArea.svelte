@@ -34,10 +34,10 @@
 </script>
 
 <div class="chat-container">
-    <form on:submit|preventDefault={submitMessageInput}>
+    <form class="form-inline" on:submit|preventDefault={submitMessageInput}>
         <label>
             Message:
-            <input id="messageInput" type="text" size="50">
+            <input id="messageInput" class="form-control" type="text" size="50">
         </label>
     </form>
     {#each messages as {isUser, text}, i}

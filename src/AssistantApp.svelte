@@ -9,10 +9,10 @@
 
 <main>
     {#if !noTitle}
-        <h1>{title}</h1>
+        <h1 id="app-title">{title}</h1>
     {/if}
 
-    <div id="debug-wrapper">
+    <div id="debug-wrapper" class="form-group">
         <label>
             <input type="checkbox" bind:checked={debug}>
             Debug
@@ -23,28 +23,30 @@
     </div>
 </main>
 
-<style>
-    main {
-        text-align: center;
-        margin: 0 auto;
-        height: 100%;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-    }
+<style type="text/scss" global>
+  @import "./bootstrap";
 
-    h1 {
-        color: blue;
-        font-size: 4em;
-    }
-    
-    #debug-wrapper {
-        display: flex;
-        justify-content: right;
-        padding: 0 10px;
-    }
+  main {
+    text-align: center;
+    margin: 0 auto;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 
-    .chat-area {
-        flex: 1;
-    }
+  #app-title {
+    color: blue;
+    font-size: 4em;
+  }
+
+  #debug-wrapper {
+    display: flex;
+    justify-content: right;
+    padding: 0 10px;
+  }
+
+  .chat-area {
+    flex: 1;
+  }
 </style>
