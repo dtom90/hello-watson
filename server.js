@@ -1,22 +1,5 @@
-const polka = require('polka');
-const sirv = require('sirv');
-const compression = require('compression');
+const {assistantServer, handler} = require('./assistantServer');
 
-const api = require('./api');
+const PORT = 3000;
 
-// Init `sirv` handler
-const assets = sirv('public', {
-  dev: process.argv[2] === '--dev',
-  maxAge: 31536000, // 1Y
-  immutable: true
-});
-
-const assistantServer = polka()
-  .use(compression(), assets)
-  .use('/api', api)
-  .listen(3000, err => {
-    if (err) throw err;
-    console.log('> Ready at http://localhost:3000'); // eslint-disable-line no-console
-  });
-
-module.exports = assistantServer;
+assistantServer.listen(PORT, handler(PORT));
