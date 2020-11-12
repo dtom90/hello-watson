@@ -10,7 +10,7 @@
     try {
       const {body} = await request.post('/api/message').send({sessionId, text});
       if (debug) {
-        console.log(body);
+        console.log(JSON.stringify(body, null, 2));
       }
       sessionId = body.sessionId;
       messages = [...messages, ...body.output.generic];

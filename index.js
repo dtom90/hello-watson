@@ -1,7 +1,6 @@
-const assistantServer = require('./server');
-const polkaApi = require('./api');
+const {assistantServer, handler} = require('./assistantServer');
 
 module.exports = {
   assistantServer,
-  polkaApi,
+  handler,
 };

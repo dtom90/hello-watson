@@ -23,11 +23,12 @@ const sendMessage = async (sessionId, input) => {
     const {result} = await initConversation();
     sessionId = result.session_id;
   }
-  return assistant.message({
+  const {result} = await assistant.message({
     assistantId,
     sessionId,
     input
   });
+  return {sessionId, result};
 };
 
 module.exports = {
