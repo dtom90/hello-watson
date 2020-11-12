@@ -2,4 +2,11 @@ const {assistantServer, handler} = require('./assistantServer');
 
 const PORT = 3000;
 
-assistantServer.listen(PORT, handler(PORT));
+const postProcess = (result) => {
+  result.output.generic.push({
+    response_type: 'text',
+    text: 'Post-processed!'
+  });
+};
+
+assistantServer(postProcess).listen(PORT, handler(PORT));
