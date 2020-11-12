@@ -11,9 +11,10 @@ const assets = sirv('public', {
   immutable: true
 });
 
-const assistantServer = polka()
-  .use(compression(), assets)
-  .use('/api', api);
+const assistantServer = (postProcess) =>
+  polka()
+    .use(compression(), assets)
+    .use('/api', api(postProcess));
 
 const handler = (port) => {
   return (err) => {
