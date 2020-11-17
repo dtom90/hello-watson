@@ -26,7 +26,12 @@ const sendMessage = async (sessionId, input) => {
   const {result} = await assistant.message({
     assistantId,
     sessionId,
-    input
+    input: {
+      ...input,
+      options: {
+        return_context: true
+      }
+    }
   });
   return {sessionId, result};
 };
