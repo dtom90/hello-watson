@@ -12,7 +12,7 @@ const api = (postProcess = () => null) => {
     ({sessionId, text} = req.body);
     try {
       ({sessionId, result} = await sendMessage(sessionId, {text}));
-      postProcess(result);
+      await postProcess(result);
       send(res, 200, {sessionId, ...result});
     } catch (error) {
       send(res, 502, {error: error.message});

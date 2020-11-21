@@ -1,6 +1,6 @@
 {
   "name": "hello-watson",
-  "version": "0.10.9",
+  "version": "0.10.10",
   "engines": {
     "node": "^14.13.0",
     "npm": "^6.14.8"
