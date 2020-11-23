@@ -44,12 +44,16 @@
         <div id="messages-view">
             {#each messages as {isUser, text}, i}
                 <div class="message-row {isUser ? 'user' : 'bot'}-message">
-                    <span class="message">{text}</span>
+                    <span class="message">
+                        {#each text.split('\n') as line}
+                            <div>{line}</div>
+                        {/each}
+                    </span>
                 </div>
             {/each}
             {#if sending}
                 <div class="message-row bot-message">
-                    <span class="message"><img class="spinner-img" src="/spinner.gif"/></span>
+                    <span class="message"><img class="spinner-img" src="/spinner.gif" alt="sending message..."/></span>
                 </div>
             {/if}
         </div>

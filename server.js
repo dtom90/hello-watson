@@ -3,16 +3,17 @@ const {assistantServer, handler} = require('./assistantServer');
 const PORT = 3000;
 
 const postProcess = (result) => {
-  if (result.output.entities.length > 0) {
-    result.output.generic.unshift({
-      response_type: 'text',
-      text: 'Entities: ' + result.output.entities.map(entity => entity.value).join(',')
-    });
-  }
+  let understanding = '';
   if (result.output.intents.length > 0) {
+    understanding += 'Intent: ' + result.output.intents[0].intent;
+  }
+  if (result.output.entities.length > 0) {
+    understanding += '\nEntities: ' + result.output.entities.map(entity => entity.value).join(',');
+  }
+  if (understanding) {
     result.output.generic.unshift({
       response_type: 'text',
-      text: 'Intent: ' + result.output.intents[0].intent
+      text: 'Understood:\n' + understanding
     });
   }
 };
