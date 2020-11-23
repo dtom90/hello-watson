@@ -5,10 +5,13 @@
 
   let sessionId = '';
   let messages = [];
+  let sending = false;
 
   async function sendMessage(text) {
     try {
+      sending = true;
       const {body} = await request.post('/api/message').send({sessionId, text});
+      sending = false;
       if (debug) {
         console.log(JSON.stringify(body, null, 2));
       }
@@ -41,9 +44,18 @@
         <div id="messages-view">
             {#each messages as {isUser, text}, i}
                 <div class="message-row {isUser ? 'user' : 'bot'}-message">
-                    <span class="message">{text}</span>
+                    <span class="message">
+                        {#each text.split('\n') as line}
+                            <div>{line}</div>
+                        {/each}
+                    </span>
                 </div>
             {/each}
+            {#if sending}
+                <div class="message-row bot-message">
+                    <span class="message"><img class="spinner-img" src="/spinner.gif" alt="sending message..."/></span>
+                </div>
+            {/if}
         </div>
     </div>
 </div>
@@ -89,5 +101,9 @@
 
     .user-message > .message {
         background-color: #007fff;
+    }
+
+    .spinner-img {
+        height: 16px;
     }
 </style>
