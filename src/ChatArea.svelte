@@ -1,4 +1,5 @@
 <script>
+  import {onMount, afterUpdate} from 'svelte';
   import request from 'superagent';
 
   export let debug = false;
@@ -7,7 +8,7 @@
   let messages = [];
   let sending = false;
 
-  async function sendMessage(text) {
+  async function sendMessage(text = '') {
     try {
       sending = true;
       const {body} = await request.post('/api/message').send({sessionId, text});
@@ -18,11 +19,16 @@
       sessionId = body.sessionId;
       messages = [...messages, ...body.output.generic];
     } catch (error) {
-      console.error(error.response);
-      messages = [...messages,
-        {isUser: false, text: 'Oops, looks like I had trouble processing that message...'},
-        {isUser: false, text: `I got the error "${error.response.body.error}"`}
-      ];
+      sending = false;
+      if (error.response) {
+        console.error(error.response);
+        messages = [...messages,
+          {isUser: false, text: 'Oops, looks like I had trouble processing that message...'},
+          {isUser: false, text: `I got the error "${error.response.body.error}"`}
+        ];
+      } else {
+        console.error(error);
+      }
     }
   }
 
@@ -33,7 +39,14 @@
     await sendMessage(text);
   }
 
-  sendMessage('');
+  onMount(sendMessage);
+
+  afterUpdate(() => {
+    const view = document.getElementById('messages-view');
+    if (view) {
+      view.scrollTo(0, view.scrollHeight);
+    }
+  });
 </script>
 
 <div id="chat-area">
@@ -53,7 +66,9 @@
             {/each}
             {#if sending}
                 <div class="message-row bot-message">
-                    <span class="message"><img class="spinner-img" src="/spinner.gif" alt="sending message..."/></span>
+                    <span class="message">
+                        <img class="spinner-img" src="/spinner.gif" alt="sending message..."/>
+                    </span>
                 </div>
             {/if}
         </div>
