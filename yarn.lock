@@ -1969,10 +1969,10 @@ ibm-cloud-sdk-core@2.4.4:
     semver "^6.2.0"
     tough-cookie "^4.0.0"
 
-ibm-watson@^5.7.1:
-  version "5.7.1"
-  resolved "https://registry.yarnpkg.com/ibm-watson/-/ibm-watson-5.7.1.tgz#e8bc1461061f0a6544f6b70b774fdc691dd7dd7a"
-  integrity sha512-G9m3aZ+N2r/pAPoVo8XQ+hyjoEMnhkKPnKgCF1oLuXUf648Mzq+qE53FKBxKsoNr9L7V8qGHiZt6rkoRpocgqQ==
+ibm-watson@5.7.3:
+  version "5.7.3"
+  resolved "https://registry.yarnpkg.com/ibm-watson/-/ibm-watson-5.7.3.tgz#699522a920e404fa814a4f19d6d8bdc6f5123191"
+  integrity sha512-S0Ky7dyGcq0iB+I/2EgRSXayDcQnlz4hdif9+W9zK2jEgvt8cWIalk4gSTmqXrRzNVYOU1KoyI/bspMdnHhdYw==
   dependencies:
     "@types/async" "^3.2.1"
     "@types/extend" "^3.0.1"
@@ -2115,9 +2115,9 @@ is-binary-path@~2.1.0:
     binary-extensions "^2.0.0"
 
 is-buffer@^2.0.2:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/is-buffer/-/is-buffer-2.0.4.tgz#3e572f23c8411a5cfd9557c849e3665e0b290623"
-  integrity sha512-Kq1rokWXOPXWuaMAqZiJW4XxsmD9zGx9q4aePabbn3qCRGedtH7Cm+zV8WETitMfu1wdh+Rvd6w5egwSngUX2A==
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/is-buffer/-/is-buffer-2.0.5.tgz#ebc252e400d22ff8d77fa09888821a24a658c191"
+  integrity sha512-i2R6zNFDwgEHJyQUtJEk0XFi1i0dPFn/oqjK3/vPCcDeJvW5NQ83V8QbicfF1SupOaB0h8ntgBC2YiE7dfyctQ==
 
 is-callable@^1.1.4, is-callable@^1.2.2:
   version "1.2.2"

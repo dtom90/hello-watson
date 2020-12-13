@@ -1,4 +1,4 @@
-const AssistantV2 = require('ibm-watson/assistant/v2');
+const {AssistantV2} = require('ibm-watson/sdk');
 require('dotenv').config();
 
 const assistant = new AssistantV2({
