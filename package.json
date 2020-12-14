@@ -1,6 +1,6 @@
 {
   "name": "hello-watson",
-  "version": "0.10.12",
+  "version": "0.10.13",
   "engines": {
     "node": "^14.13.0",
     "npm": "^6.14.8"
@@ -23,7 +23,7 @@
     "compression": "^1.7.4",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "ibm-watson": "^5.7.1",
+    "ibm-watson": "5.7.3",
     "polka": "^0.5.2",
     "sirv": "^1.0.6",
     "sirv-cli": "^1.0.0",
